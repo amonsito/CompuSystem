@@ -1,0 +1,134 @@
+﻿@page "/Proveedores"
+@using Datos.Models;
+@inject HttpClient Http
+
+<PageTitle>Proveedores</PageTitle>
+
+<button class="btn btn-primary float-right" @onclick="ShowModal">Agregar</button>
+
+@if (providors == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Documento</th>
+                <th>Telefono</th>
+                <th>Tipo de Usuario</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in providors)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Documento</td>
+                    <td>@item.Telefono</td>
+                    <td>@item.Tipo_Usuario</td>
+                    <td>@item.Estado</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@if (showModal)
+{
+    <div class="modal fade show" style="display: block;">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar usuario</h5>
+                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="primerNombre" class="form-label">Primer Nombre*</label>
+                                <input type="text" class="form-control" id="primerNombre" placeholder="Ingrese el primer nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="primerApellido" class="form-label">Primer Apellido*</label>
+                                <input type="text" class="form-control" id="primerApellido" placeholder="Ingrese el primer apellido" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="telefono" placeholder="Ingrese el teléfono">
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+                                <label for="segundoNombre" class="form-label">Segundo Nombre</label>
+                                <input type="text" class="form-control" id="segundoNombre" placeholder="Ingrese el segundo nombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="segundoApellido" class="form-label">Segundo Apellido</label>
+                                <input type="text" class="form-control" id="segundoApellido" placeholder="Ingrese el segundo apellido">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="tipoUsuario" class="form-label">Tipo de Usuario</label>
+                                <select class="form-select" id="tipoUsuario">
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Vendedor">Vendedor</option>
+                                    <option value="Cliente">Cliente</option>
+                                    <option value="BI">BI</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="switch">
+                                <label class="form-check-label" for="switch">Habilitado</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @onclick="GuardarModal">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
+
+@code {
+    private Providers[]? providors;
+
+    protected override async Task OnInitializedAsync()
+    {
+        providors = await Http.GetFromJsonAsync<Providers[]>("sample-data/Usuarios.json");
+    }
+
+    public class Providers
+    {
+        public string Nombre { get; set; }
+        public string Documento { get; set; }
+        public string Telefono { get; set; }
+        public string Tipo_Usuario { get; set; }
+        public string Estado { get; set; }
+
+    }
+    private bool showModal = false;
+
+    private void ShowModal()
+    {
+        showModal = true;
+    }
+
+    private void CloseModal()
+    {
+        showModal = false;
+    }
+
+    private void GuardarModal()
+    {
+
+    }
+}

@@ -1,0 +1,30 @@
+﻿[
+  {
+    "Nombre": "Jeyson David Castro Perez",
+    "Documento": "1075489658",
+    "Telefono": "7846512",
+    "Tipo_Usuario": "Administrador",
+    "Estado": "Activo"
+  },
+  {
+    "Nombre": "Cristian Gonzalo Castillo Carvajal",
+    "Documento": "128796523",
+    "Telefono": "7846512",
+    "Tipo_Usuario": "Vendedor",
+    "Estado": "Activo"
+  },
+  {
+    "Nombre": "Juan David Jimenez Castro",
+    "Documento": "1075489658",
+    "Telefono": "7846512",
+    "Tipo_Usuario": "Cliente",
+    "Estado": "Activo"
+  },
+  {
+    "Nombre": "Alberto Ruben Restrepo Ray",
+    "Documento": "1075489658",
+    "Telefono": "7846512",
+    "Tipo_Usuario": "BI",
+    "Estado": "Activo"
+  }
+]
